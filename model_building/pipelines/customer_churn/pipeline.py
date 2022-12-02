@@ -116,7 +116,7 @@ def get_pipeline(
 
     # Training step for generating model artifacts
     model_path = f"s3://{sagemaker_session.default_bucket()}/{base_job_prefix}/CustomerChurnTrain"
-    image_uri = '000257663186.dkr.ecr.us-east-1.amazonaws.com/custom_model_images:latest'
+    image_uri = '000257663186.dkr.ecr.us-east-1.amazonaws.com/custom_model_images:latest' #change this to your custom training image URI
     
     xgb_train = Estimator(
         image_uri=image_uri,
