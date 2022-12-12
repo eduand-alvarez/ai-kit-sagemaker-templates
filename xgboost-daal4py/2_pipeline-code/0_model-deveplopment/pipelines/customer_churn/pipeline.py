@@ -20,7 +20,6 @@ Implements a get_pipeline(**kwargs) method.
 """
 
 import os
-
 import boto3
 import sagemaker
 import sagemaker.session
@@ -37,7 +36,9 @@ from sagemaker.workflow.properties import PropertyFile
 from sagemaker.workflow.step_collections import RegisterModel
 from sagemaker.workflow.steps import ProcessingStep, TrainingStep
 
+
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
+
 
 
 def get_session(region, default_bucket):
@@ -66,7 +67,7 @@ def get_pipeline(
     role=None,
     default_bucket=None,
     model_package_group_name="CustomerChurnPackageGroup",  # Choose any name
-    pipeline_name="ml-tutorial-3-p-jdeisifvqh8o",  # You can find your pipeline name in the Studio UI (project -> Pipelines -> name)
+    pipeline_name="ml-tutorials-3-p-iaaokyhyptca",  # You can find your pipeline name in the Studio UI (project -> Pipelines -> name)
     base_job_prefix="CustomerChurn",  # Choose any name
     processing_instance_type="ml.m5.xlarge",
     training_instance_type="ml.m5.xlarge",
@@ -117,13 +118,8 @@ def get_pipeline(
 
     # Training step for generating model artifacts
     model_path = f"s3://{sagemaker_session.default_bucket()}/{base_job_prefix}/CustomerChurnTrain"
-    image_uri = sagemaker.image_uris.retrieve(
-        framework="xgboost",  # we are using the Sagemaker built in xgboost algorithm
-        region=region,
-        version="1.0-1",
-        py_version="py3",
-        instance_type=training_instance_type,
-    )
+    image_uri = '000257663186.dkr.ecr.us-east-1.amazonaws.com/custom_model_images:latest' #change this to your custom training image URI
+    
     xgb_train = Estimator(
         image_uri=image_uri,
         instance_type=training_instance_type,
@@ -136,6 +132,8 @@ def get_pipeline(
         max_run=300,
         max_wait=600
     )
+    
+    
     xgb_train.set_hyperparameters(
         objective="binary:logistic",
         max_depth=5,

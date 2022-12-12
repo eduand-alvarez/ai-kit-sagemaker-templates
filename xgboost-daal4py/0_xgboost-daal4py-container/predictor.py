@@ -11,6 +11,8 @@ import signal
 import sys
 import traceback
 import http.client
+import numpy as np
+import daal4py as d4p
 
 import flask
 import pandas as pd
@@ -34,14 +36,39 @@ class ScoringService(object):
         return cls.model
 
     @classmethod
-    def predict(cls, input):
+    def predict(cls, input, daal_opt=False):
         """For the input, do the predictions and return them.
         Args:
             input (a pandas dataframe): The data on which to do the predictions. There will be
                 one prediction per row in the dataframe"""
-        clf = cls.get_model()
-        return clf.predict(input)
 
+        clf = cls.get_model()
+        
+        if daal_opt:
+            daal_model = d4p.get_gbt_model_from_xgboost(clf.get_booster())
+            return d4p.gbt_classification_prediction(nClasses=2, resultsToEvaluate='computeClassProbabilities', fptype='float').compute(input, daal_model).probabilities[:,1]
+            
+        return clf.predict(input)
+        
+def process_payload(payload):
+    sample = list(payload.split(","))
+    processed = np.asarray(sample, dtype=float)
+    processed = processed.reshape(1,-1)
+    return processed
+
+
+def encode_predictions_as_json(predictions):
+    """Encode the selected predictions based on the JSON output format expected.
+        See https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html
+    :param predictions: list of predictions.
+    :return: encoded content in JSON
+        example: b'{"predictions": [{"score": 0.43861907720565796},
+        {"score": 0.4533972144126892}, {"score": 0.06351257115602493}]}'
+    """
+    preds_list_of_dict = []
+    for pred in predictions:
+        preds_list_of_dict.append({"score": pred})
+    return json.dumps({"predictions": preds_list_of_dict})
 
 # The flask app for serving predictions
 app = flask.Flask(__name__)
@@ -62,7 +89,18 @@ def invocations():
     payload = flask.request.data.strip().decode("utf-8")
     if len(payload) == 0:
         return flask.Response(response="no valid data passed", status=http.client.NO_CONTENT)
+        
+    try:
+        model_load_test = ScoringService.get_model()
+    except Exception as e:
+        return flask.Response(response="Unable to load model", status=http.client.INTERNAL_SERVER_ERROR)
+    
+    processed_payload = process_payload(payload)
 
-    preds = ScoringService.predict(payload)
+    pred = ScoringService.predict(processed_payload, daal_opt=True)
+    
+    pred_list = pred.tolist()
+    
+    encoded_pred = encode_predictions_as_json(pred_list)
 
-    return flask.Response(response=preds, status=200, mimetype="text/csv")
+    return flask.Response(response=encoded_pred, status=200, mimetype='text/csv')
