@@ -3,7 +3,7 @@ A repository that supports tutorials on building sagemaker pipelines with Intel 
 
 ## General Project Structure
 
-Each template folder in the repo is named after the AI Kit component that it was tailored for. 
+Each template folder in the repo is named after the AI Kit component that it was tailored for. At the moment, we only have as single template for XGBoost and Daal4py optimizations on Xeon CPUs.
 
 ```
 Template Folder Example
