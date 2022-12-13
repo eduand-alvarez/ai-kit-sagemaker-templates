@@ -21,7 +21,7 @@ Template Folder Example
 
 ## Decription of Components
 
-### 1_<ai-kit-component>-container
+### 1_ai-kit-component-container
 This folder contains all of the custom model container components. This is the most important folder in the repo because it was the main motivation behind this intiative. SageMaker typically expects you to use their pre-package images for their pipelines but the containers in this repo will allows you to incorporate hardware accelerated libraries into your trianing and inference pipeline components. 
     
 ### 2_lambda-container
