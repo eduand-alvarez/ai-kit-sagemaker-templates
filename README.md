@@ -5,6 +5,7 @@ A repository that supports tutorials on building sagemaker pipelines with Intel 
 
 Each folder in the repo is named after the AI Kit component that it was tailored for. 
 
+```
 ├───0_xgboost-daal4py-container
 ├───1_lambda-container
 └───2_pipeline-code
@@ -14,3 +15,4 @@ Each folder in the repo is named after the AI Kit component that it was tailored
     │   └───tests
     └───1_model-deployment
         └───tests
+```
