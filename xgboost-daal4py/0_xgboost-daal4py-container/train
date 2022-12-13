@@ -12,23 +12,12 @@ from sklearn.model_selection import train_test_split
 
 import os
 
-def list_files(startpath):
-    for root, dirs, files in os.walk(startpath):
-        level = root.replace(startpath, '').count(os.sep)
-        indent = ' ' * 4 * (level)
-        print('{}{}/'.format(indent, os.path.basename(root)))
-        subindent = ' ' * 4 * (level + 1)
-        for f in files:
-            print('{}{}'.format(subindent, f))
-
 if __name__ == '__main__':
     
     # setting paths to locations where sagemaker will inject data and expect models
     prefix = '/opt/ml/'
     input_path = prefix + 'input/data'
     model_path = os.path.join(prefix, 'model')
-    
-    list_files(prefix)
 
     #Passing in environment variables and hyperparameters for our training script
     parser = argparse.ArgumentParser()
