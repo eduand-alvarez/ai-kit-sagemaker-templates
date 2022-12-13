@@ -69,7 +69,7 @@ def get_pipeline(
     role=None,
     default_bucket=None,
     model_package_group_name="CustomerChurnPackageGroup",  # Choose any name
-    pipeline_name="ml-tutorials-3-p-iaaokyhyptca",  # You can find your pipeline name in the Studio UI (project -> Pipelines -> name)
+    pipeline_name="",  # You can find your pipeline name in the Studio UI (project -> Pipelines -> name)
     base_job_prefix="CustomerChurn",  # Choose any name
     processing_instance_type="ml.m5.xlarge",
     training_instance_type="ml.m5.xlarge",
@@ -94,7 +94,7 @@ def get_pipeline(
     )
     input_data = ParameterString(
         name="InputDataUrl",
-        default_value=f"s3://sagemaker-us-east-1-000257663186/sagemaker/DEMO-xgboost-churn/data/RawData.csv",  # Change this to point to the s3 location of your raw input data.
+        default_value=f"",  # Change this to point to the s3 location of your raw input data.
     )
 
     # Processing step for feature engineering
@@ -120,7 +120,7 @@ def get_pipeline(
 
     # Training step for generating model artifacts
     model_path = f"s3://{sagemaker_session.default_bucket()}/{base_job_prefix}/CustomerChurnTrain"
-    image_uri = '000257663186.dkr.ecr.us-east-1.amazonaws.com/custom_model_images:latest' #change this to your custom training image URI
+    image_uri = "" #change this to your custom training image URI
     
     xgb_train = Estimator(
         image_uri=image_uri,
