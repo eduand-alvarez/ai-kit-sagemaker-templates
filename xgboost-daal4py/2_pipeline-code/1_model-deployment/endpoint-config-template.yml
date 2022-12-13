@@ -26,7 +26,6 @@ Parameters:
   EndpointInstanceType:
     Type: String
     Description: The ML compute instance type for the endpoint.
-    Default: m6i.4xlarge
   DataCaptureUploadPath:
     Type: String
     Description: The s3 path to which the captured data is uploaded.
