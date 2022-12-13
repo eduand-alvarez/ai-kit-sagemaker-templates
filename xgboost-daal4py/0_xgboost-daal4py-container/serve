@@ -3,15 +3,6 @@
 # This file implements the scoring service shell. You don't necessarily need to modify it for various
 # algorithms. It starts nginx and gunicorn with the correct configurations and then simply waits until
 # gunicorn exits.
-#
-# The flask server is specified to be the app object in wsgi.py
-#
-# We set the following parameters:
-#
-# Parameter                Environment Variable              Default Value
-# ---------                --------------------              -------------
-# number of workers        MODEL_SERVER_WORKERS              the number of CPU cores
-# timeout                  MODEL_SERVER_TIMEOUT              60 seconds
 
 import multiprocessing
 import os
