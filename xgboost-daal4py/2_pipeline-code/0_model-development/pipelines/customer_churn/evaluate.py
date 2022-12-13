@@ -28,36 +28,12 @@ logger.addHandler(logging.StreamHandler())
 # May need to import additional metrics depending on what you are measuring.
 # See https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-metrics.html
 from sklearn.metrics import accuracy_score, classification_report, roc_auc_score
-
-
-def list_files(startpath):
-    for root, dirs, files in os.walk(startpath):
-        level = root.replace(startpath, '').count(os.sep)
-        indent = ' ' * 4 * (level)
-        print('{}{}/'.format(indent, os.path.basename(root)))
-        subindent = ' ' * 4 * (level + 1)
-        for f in files:
-            print('{}{}'.format(subindent, f))
-        
-
-            
+                
 if __name__ == "__main__":
-    
-    print('this is the entry dir: ', os.getcwd()) 
-    
-    print('pre......')
-    list_files('/opt')
-    print('pre......')
     
     model_path = "/opt/ml/processing/model/model.tar.gz"
     with tarfile.open(model_path) as tar:
         tar.extractall(path="../program")    
-    
-    print('post......')
-    list_files('/opt')
-    print('post......')
-    
-    print('this is the current dir: ', os.getcwd()) 
 
     logger.debug("Loading xgboost model.")
     model = pickle.load(open("xgboost-model", "rb"))
