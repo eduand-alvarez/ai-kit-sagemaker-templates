@@ -11,7 +11,7 @@ Template Folder Example
 ├───0_xgboost-daal4py-container
 ├───1_lambda-container
 └───2_pipeline-code
-    ├───0_model-deveplopment
+    ├───0_model-development
     │   ├───pipelines
     │   │   └───customer_churn
     │   └───tests
