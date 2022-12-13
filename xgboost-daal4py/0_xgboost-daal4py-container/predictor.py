@@ -20,10 +20,6 @@ import pandas as pd
 prefix = "/opt/ml/"
 model_path = os.path.join(prefix, "model")
 
-# A singleton for holding the model. This simply loads the model and holds it.
-# It has a predict function that does a prediction based on the model and the input data.
-
-
 class ScoringService(object):
     model = None  # Where we keep the model when it's loaded
 
@@ -37,7 +33,7 @@ class ScoringService(object):
 
     @classmethod
     def predict(cls, input, daal_opt=False):
-        """For the input, do the predictions and return them.
+        """Receives an input and conditionally optimizes xgboost model using daal4py conversion.
         Args:
             input (a pandas dataframe): The data on which to do the predictions. There will be
                 one prediction per row in the dataframe"""
@@ -59,7 +55,6 @@ def process_payload(payload):
 
 def encode_predictions_as_json(predictions):
     """Encode the selected predictions based on the JSON output format expected.
-        See https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html
     :param predictions: list of predictions.
     :return: encoded content in JSON
         example: b'{"predictions": [{"score": 0.43861907720565796},
