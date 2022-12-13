@@ -29,3 +29,9 @@ This folder contains all of the components of a custom AWS Lambda function. You 
     
 ### 3_pipeline-code
 This folder contains the edited code that typically comes with the "MLOps template for model building, training, and deployment" available as part of the SageMaker service. The files in this template can evolve as AWS updates their APIs but the general idea will remain the same. In the accompanying tutorials for each AI Kit component, you will find instructions for what files to replace/edit. 
+
+
+### List of Associated Medium Articles
+- A Guide to Implementing Customized Training and Inference in AWS SageMaker
+- Custom SageMaker Model Images for Accelerated Machine Learning Libraries
+- Building AWS Lambda From ECR Image for Machine Learning Inference Endpoint
