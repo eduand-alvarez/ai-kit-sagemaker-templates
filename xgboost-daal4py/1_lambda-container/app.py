@@ -10,8 +10,8 @@ warnings.simplefilter("ignore")
 # grab environment variables
 ENDPOINT_NAME = os.environ['ENDPOINT_NAME']
 runtime= boto3.client('runtime.sagemaker')
-trans_bucket = "sagemaker-us-east-1-000257663186"
-s3_trans_key = "cust-churn-model/transformation/transformation.sav"
+trans_bucket = "your transformation bucket name"
+s3_trans_key = "path to transformation.sav in your bucket"
 s3 = boto3.resource('s3')
 
 def process_data(event):
