@@ -10,6 +10,8 @@
 # distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
+#
+# Modified by Eduardo Alvarez on 12/13/2022
 """Example workflow pipeline script for CustomerChurn pipeline.
                                                . -RegisterModel
                                               .
