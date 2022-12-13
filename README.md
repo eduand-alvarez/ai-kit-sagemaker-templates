@@ -32,6 +32,6 @@ This folder contains the edited code that typically comes with the "MLOps templa
 
 
 ### List of Associated Medium Articles
-- A Guide to Implementing Customized Training and Inference in AWS SageMaker
-- Custom SageMaker Model Images for Accelerated Machine Learning Libraries
-- Building AWS Lambda From ECR Image for Machine Learning Inference Endpoint
+- [Guide to Building AWS Lambda Functions from ECR Images to Manage SageMaker Inference Endpoints](https://medium.com/@eduand-alvarez/guide-to-building-aws-lambda-functions-from-ecr-images-to-manage-sagemaker-inference-endpoints-4980a9b92290)
+- [Guide to Implementing Custom Accelerated AI Libraries in SageMaker with oneAPI and Docker](https://medium.com/@eduand-alvarez/guide-to-implementing-custom-accelerated-ai-libraries-in-sagemaker-with-oneapi-and-docker-97547692cb6e)
+- [A Detailed Guide for Building Hardware Accelerated MLOps Pipelines in SageMaker](https://medium.com/@eduand-alvarez/a-detailed-guide-for-building-hardware-accelerated-mlops-pipelines-in-sagemaker-5d32459665b3)
